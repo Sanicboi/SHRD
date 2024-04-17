@@ -11,7 +11,7 @@ using System.IO;
 
 namespace SHRD
 {
-    internal class AuthorizationController
+    internal static class AuthorizationController
     {
         
         private static HttpClient client = new HttpClient();

@@ -8,7 +8,7 @@ using System.IO;
 
 namespace SHRD
 {
-    internal class TokenManager
+    internal static class TokenManager
     {
         public static async Task Set(string token)
         {

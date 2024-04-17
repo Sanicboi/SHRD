@@ -131,6 +131,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TokenManager.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserController.cs" />
     <Compile Include="UserCreateData.cs" />
   </ItemGroup>
   <ItemGroup>
