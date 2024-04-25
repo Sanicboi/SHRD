@@ -26,5 +26,15 @@ namespace SHRD
         {
             this.InitializeComponent();
         }
+
+        private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void TextBlock_Tapped_1(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
     }
 }

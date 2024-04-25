@@ -1,0 +1,75 @@
+﻿<Page
+    x:Class="SHRD.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SHRD"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Verdana"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Label">
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Margin" Value="16 10 0 0"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+        
+        <SolidColorBrush x:Key="TextControlBackground" Color="White"/>
+        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="White"/>
+        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="White"/>
+        
+        <SolidColorBrush x:Key="TextControlForeground" Color="Black"/>
+        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="Black"/>
+        <SolidColorBrush x:Key="TextControlForegroundinterOver" Color="Black"/>
+        
+        <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="White"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="White"/>
+        <SolidColorBrush x:Key="TextControlBorderBrush" Color="White"/>
+
+        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="White"/>
+        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="White"/>
+        <SolidColorBrush x:Key="ButtonBorderBrushPresse" Color="White"/>
+        <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="White"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/school.jpg" Stretch="None" Opacity="0.3"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"  Width="600" MaxHeight="300" VerticalAlignment="Center" CornerRadius="16" Padding="16 16 16 16">
+            <Grid.Background>
+                <!--<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#62cff4" Offset="0.0"/>
+                    <GradientStop Color="" Offset="1.0"/>
+                </LinearGradientBrush>-->
+                <SolidColorBrush Color="#2f67ff"></SolidColorBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" TextAlignment="Center" FontSize="24" FontWeight="Bold" Margin="0 20 0 0">Вход</TextBlock>
+            <TextBlock Grid.Row="1" Style="{StaticResource Label}">Ник</TextBlock>
+            <TextBox CornerRadius="4" Grid.Row="2" x:Name="Username" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16 10 0 0" Width="300">
+                <TextBox.Resources>
+
+                </TextBox.Resources>
+            </TextBox>
+            <TextBlock Grid.Row="3" Style="{StaticResource Label}">Пароль</TextBlock>
+            <PasswordBox CornerRadius="4" Grid.Row="4" x:Name="Password" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16 10 0 0" Width="300"></PasswordBox>
+            <Button CornerRadius="4" Background="White" Grid.Row="5" Margin="0 20 0 10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Войти" Click="Button_Click"></Button>
+        </Grid>
+    </Grid>
+</Page>

@@ -61,7 +61,7 @@ namespace SHRD
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(LoginPage), e.Arguments);
+                    rootFrame.Navigate(typeof(HomePage), e.Arguments);
                 }
                 
                 Window.Current.Activate();
