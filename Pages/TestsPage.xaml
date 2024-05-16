@@ -9,11 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <Style TargetType="TextBlock" x:Key="Navigation">
-            <Setter Property="TextAlignment" Value="Center"></Setter>
-            <Setter Property="Foreground" Value="White"></Setter>
-            <Setter Property="Margin" Value="0 16 0 0 "></Setter>
-        </Style>
     </Page.Resources>
     <Grid xmlns:src="using:SHRD">
         <Grid.ColumnDefinitions>
@@ -21,12 +16,34 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <src:LeftNavBar Grid.Column="0"></src:LeftNavBar>
-        <Grid Padding="32 32 32 32" RowSpacing="16" ColumnSpacing="16" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <src:TestCard Grid.Row="0"></src:TestCard>
-        </Grid>
+        <ScrollViewer Grid.Column="1">
+            <StackPanel xmlns:models="using:SHRD.Models"  Padding="16" Orientation="Vertical">
+                <TextBlock FontSize="32">Алгебра</TextBlock>
+                <ListView SelectionChanged="Selected_Algebra" Margin="0 16 0 0" x:Name="Algebra" SelectionMode="Single" ItemsSource="{x:Bind AlgebraTests}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Test">
+                            <TextBlock Text="{x:Bind name}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock FontSize="32" Margin="0 16 0 0">Геометрия</TextBlock>
+                <ListView SelectionChanged="Selected_Geometry" Margin="0 16 0 0" x:Name="Geometry" SelectionMode="Single" ItemsSource="{x:Bind GeometryTests}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Test">
+                            <TextBlock  Text="{x:Bind name}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock FontSize="32" Margin="0 16 0 0">Tеория вероятностей и статистика</TextBlock>
+                <ListView SelectionChanged="Selected_Statistics" Margin="0 16 0 0" x:Name="Statistics" SelectionMode="Single" ItemsSource="{x:Bind StatisticsTests}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Test">
+                            <TextBlock  Text="{x:Bind name}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Margin="0 16 0 0" Click="Button_Click">Создать Тест</Button>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

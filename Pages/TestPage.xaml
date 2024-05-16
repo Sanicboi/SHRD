@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="SHRD.TestPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SHRD"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid xmlns:src="using:SHRD">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <src:LeftNavBar Grid.Column="0"></src:LeftNavBar>
+        <ScrollViewer Grid.Column="1">
+            <StackPanel xmlns:models="using:SHRD.Models"  Orientation="Vertical" Padding="16">
+                <TextBlock FontSize="32" Text="{x:Bind currentTest.name}"></TextBlock>
+                <ItemsControl ItemsSource="{x:Bind currentTest.tasks}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:TestTask">
+                            <StackPanel Margin="0 16 0 0">
+                                <TextBlock Text="{x:Bind text}"></TextBlock>
+                                <TextBox Margin="0 8 0 0" Text="{x:Bind answer}" x:DefaultBindMode="TwoWay"></TextBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button Margin="0 32 0 0" Click="OnSubmit">Сдать</Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

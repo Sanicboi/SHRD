@@ -1,0 +1,16 @@
+version: "3.0"
+name: shrd
+services:
+  backend:
+    restart: always
+    build: .
+    ports:
+      - 80:80
+    env_file:
+      - .env
+  db:
+    ports:
+      - 5432:5432
+    image: postgres
+    env_file:
+      - .pg.env

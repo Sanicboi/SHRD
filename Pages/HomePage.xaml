@@ -7,25 +7,55 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.Resources>
-        <Style TargetType="TextBlock" x:Key="Navigation">
-            <Setter Property="TextAlignment" Value="Center"></Setter>
-            <Setter Property="Foreground" Value="White"></Setter>
-            <Setter Property="Margin" Value="0 16 0 0 "></Setter>
-        </Style>
-    </Page.Resources>
     <Grid xmlns:src="using:SHRD">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <src:LeftNavBar Grid.Column="0"></src:LeftNavBar>
-        <Grid Padding="32 32 32 32" RowSpacing="16" ColumnSpacing="16" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <src:TheoryCard Grid.Row="0"></src:TheoryCard>
-        </Grid>
+        <ScrollViewer Grid.Column="1">
+            <StackPanel xmlns:mod="using:SHRD.Models" Padding="16" Orientation="Vertical">
+                <TextBlock Grid.Row="0" FontSize="32">Алгебра</TextBlock>
+                <ListView Margin="0 16 0 0" x:Name="Algebra" SelectionChanged="Algebra_Select" Grid.Row="1" SelectionMode="Single" ItemsSource="{x:Bind AlgebraTheory}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="Border">
+                            <Setter Property="Width" Value="0"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate   x:DataType="mod:Theory">
+                            <TextBlock Text="{x:Bind name}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock Margin="0 16 0 0" Grid.Row="2" FontSize="32">Геометрия</TextBlock>
+                <ListView Margin="0 16 0 0" Grid.Row="3" x:Name="Geometry" SelectionChanged="Geometry_Select" SelectionMode="Single" ItemsSource="{x:Bind GeometryTheory}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="Border">
+                            <Setter Property="Width" Value="0"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate  x:DataType="mod:Theory">
+                            <TextBlock Text="{x:Bind name}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock Margin="0 16 0 0" Grid.Row="4" FontSize="32">Теория Вероятностей и Статистика</TextBlock>
+                <ListView Margin="0 16 0 0" x:Name="Statistics" Grid.Row="5" SelectionChanged="Statistics_Select" SelectionMode="Single" ItemsSource="{x:Bind StatisticsTheory}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="Border">
+                            <Setter Property="Width" Value="0"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate  x:DataType="mod:Theory">
+                            <TextBlock Text="{x:Bind name}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Margin="0 16 0 0" Grid.Row="6" Click="Button_Click">Создать статью</Button>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

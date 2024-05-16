@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SHRD.Models
 {
-    internal class UserCreateData
+    public class TestStats
     {
-        public string username { get; set; }
-        public string password { get; set; }
+        public float result { get; set; }
     }
 }

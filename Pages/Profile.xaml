@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="SHRD.Profile"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SHRD.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="Navigation">
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Margin" Value="0 16 0 0 "></Setter>
+        </Style>
+    </Page.Resources>
+    <Grid xmlns:src="using:SHRD">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <src:LeftNavBar Grid.Column="0"></src:LeftNavBar>
+        <Grid Padding="32 32 32 32" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height=".5*"></RowDefinition>
+                <RowDefinition Height=".5*"></RowDefinition>
+                <RowDefinition Height=".5*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <PersonPicture Grid.Row="0" Contact="{x:Bind me}"></PersonPicture>
+            <TextBlock Grid.Row="1" Margin="0 0 0 0" Text="{x:Bind me.FullName }" FontSize="42" FontWeight="SemiBold" TextAlignment="Center"></TextBlock>
+            <TextBlock VerticalAlignment="Top" Grid.Row="2" Margin="0 0 0 0" Text="{x:Bind SolvedTasks}" TextAlignment="Center" FontWeight="SemiLight" FontSize="32"></TextBlock>
+            <TextBlock VerticalAlignment="Top" Grid.Row="3" Margin="0 0 0 0" Text="{x:Bind AvgPerc}" TextAlignment="Center" FontWeight="SemiLight" FontSize="32"></TextBlock>
+        </Grid>
+    </Grid>
+</Page>

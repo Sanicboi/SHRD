@@ -4,6 +4,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Text;
+using SHRD.Models;
+using System.Net.Http.Json;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace SHRD
 {
@@ -11,11 +16,10 @@ namespace SHRD
     {
         private class TestListWrapper
         {
-            public List<Test> data { get; set; }
+            public List<Test> tests { get; set; }
         }
 
-        public static List<string> currentAnswers;
-        public static Test currentTest;
+        
         public static int currentTaskIdx = 0;
 
 
@@ -23,13 +27,21 @@ namespace SHRD
         public static async Task Setup(string baseAddress = "http://localhost/")
         {
             client.BaseAddress = new Uri(baseAddress);
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {AuthorizationController.Token}");
         }
         public static async Task<List<Test>> GetTests()
         {
-            var response = await client.GetAsync("api/tests");
-            string data = await response.Content.ReadAsStringAsync();
-            TestListWrapper arr = JsonSerializer.Deserialize<TestListWrapper>(data);
-            return arr.data;
+            try
+            {
+                var response = await client.GetAsync("api/tests");
+                string data = await response.Content.ReadAsStringAsync();
+                TestListWrapper arr = JsonSerializer.Deserialize<TestListWrapper>(data);
+                return arr.tests;
+            } catch (Exception ex)
+            {
+                return null;
+            }
+
         }
 
         public static async Task<List<Test>> GetTests(string categoryId)
@@ -37,7 +49,7 @@ namespace SHRD
             var response = await client.GetAsync($"api/tests/categories/{categoryId}");
             string data = await response.Content.ReadAsStringAsync();
             TestListWrapper arr = JsonSerializer.Deserialize<TestListWrapper>(data);
-            return arr.data;
+            return arr.tests;
         }
 
         public static async Task<Test> GetTest(string id)
@@ -47,24 +59,40 @@ namespace SHRD
             Test test = JsonSerializer.Deserialize<Test>(data);
             return test;
         }
-
-        public static bool Check(Test test, int idx, string answer)
+        private class AnswerWrapper
         {
-            return test.tasks[idx].answer == answer;
+            public List<Answer> answers { get; set; }
         }
 
-        public static int Check(Test test, List<string> answers)
+        public static async Task<Result> SubmitStats(Test data)
         {
-            if (answers.Count != test.tasks.Count) throw new IndexOutOfRangeException();
-            int points = 0;
-            for (int i = 0; i < answers.Count; i++)
+            var url = $"api/test/{data.id}/answers";
+            AnswerWrapper d = new AnswerWrapper();
+            d.answers = data.tasks.ConvertAll<Answer>(el =>
             {
-                if (Check(test, i, answers[i]))
-                {
-                    points++;
-                }
+                Answer a = new Answer();
+                a.text = el.answer;
+                a.id = el.id;
+                return a;
+            });
+            var response = await client.PostAsJsonAsync(url, d);
+            response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            Result res = JsonSerializer.Deserialize<Result>(content);
+            return res;
+        }
+
+        public static async Task CreateTest(Test data)
+        {
+            try
+            {
+                var stringContent = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("api/test", stringContent);
+                response.EnsureSuccessStatusCode();
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
-            return points;
         }
     }
 }

@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SHRD
+namespace SHRD.Models
 {
-    internal class User
+    public class User
     {
-        public string Id;
-        public string Name;
+        public string id { get; set; }
+        public string username { get; set; }
+        public List<Test> tests { get; set; }
+        public List<TestStats> statistics { get; set; }
     }
 }

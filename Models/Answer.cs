@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SHRD.Models
 {
-    internal class UserCreateData
+    public class Answer
     {
-        public string username { get; set; }
-        public string password { get; set; }
+        public string id { get; set; }
+        public string text { get; set; }
     }
 }

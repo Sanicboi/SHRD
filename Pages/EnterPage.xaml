@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="SHRD.EnterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SHRD"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#2198DC"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="CornerRadius" Value="15"></Setter>
+            <Setter Property="Padding" Value="0 14"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="280"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
+        </Style>
+        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#2198DC"/>
+        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#2198DC"/>
+        <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#2198DC"/>
+        <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#2198DC"/>
+        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White" />
+        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="White" />
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Assets/circles-1.jpg" Stretch="UniformToFill"></ImageBrush>
+        </Grid.Background>
+        <Grid Background="#013451" Width="500" Height="400" CornerRadius="20" Padding="110 64 110 64">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Foreground="White" TextAlignment="Center" FontSize="45" FontWeight="Bold">Jarvis</TextBlock>
+            <Button Grid.Row="1" Margin="0 48 0 0" Click="Login">Вход</Button>
+            <Button Grid.Row="2" Margin="0 32 0 0" Click="Signup">Регистрация</Button>
+        </Grid>
+    </Grid>
+</Page>

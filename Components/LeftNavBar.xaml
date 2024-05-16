@@ -6,30 +6,34 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="1080"
+    d:DesignWidth="300">
     <UserControl.Resources>
         <Style TargetType="TextBlock" x:Key="Navigation">
             <Setter Property="TextAlignment" Value="Center"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>
-            <Setter Property="Margin" Value="0 16 0 0 "></Setter>
+            <Setter Property="Margin" Value="0 32 0 0 "></Setter>
         </Style>
+        <SolidColorBrush x:Key="Selected" Color="#2198DC"></SolidColorBrush>
+        <SolidColorBrush x:Key="Deselected" Color="White"></SolidColorBrush>
     </UserControl.Resources>
 
     <Grid VerticalAlignment="Stretch">
         <Grid.Background>
-            <SolidColorBrush>#2C67F2</SolidColorBrush>
+            <SolidColorBrush>#013451</SolidColorBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <!--<TextBlock Grid.Row="0" Style="{StaticResource Navigation}" FontSize="24" FontWeight="Bold">Главная</TextBlock>-->
-        <TextBlock Grid.Row="0" Style="{StaticResource Navigation}" FontSize="16" Tapped="Theory">Теория</TextBlock>
-        <TextBlock Grid.Row="1" Style="{StaticResource Navigation}" FontSize="16" Tapped="Tests">Тесты</TextBlock>
-        <TextBlock Grid.Row="2" Style="{StaticResource Navigation}" FontSize="16">Профиль</TextBlock>
-        <TextBlock Grid.Row="3" Style="{StaticResource Navigation}" FontSize="16" VerticalAlignment="Bottom" Margin="0 0 0 16">Поддержка</TextBlock>
+        <TextBlock Grid.Row="0" x:Name="TheoryBtn" Style="{StaticResource Navigation}" FontSize="40" Tapped="Theory">Теория</TextBlock>
+        <TextBlock Grid.Row="1" x:Name="TestBtn" Style="{StaticResource Navigation}" FontSize="40" Tapped="Tests">Тесты</TextBlock>
+        <TextBlock Grid.Row="2" x:Name="ProfileBtn" Style="{StaticResource Navigation}" FontSize="40" Tapped="Profile">Профиль</TextBlock>
+        <TextBlock Grid.Row="3" x:Name="SupportBtn" Style="{StaticResource Navigation}" FontSize="40" Tapped="Support">Поддержка</TextBlock>
+        <TextBlock Grid.Row="4" Style="{StaticResource Navigation}" VerticalAlignment="Bottom" Margin="0 0 0 16" FontWeight="Bold" FontSize="45">Jarvis</TextBlock>
     </Grid>
 </UserControl>

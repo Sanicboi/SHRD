@@ -34,7 +34,34 @@ namespace SHRD
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            await AuthorizationController.Login(Username.Text, Password.Password);
+            try
+            {
+                await AuthorizationController.Login(Username.Text, Password.Password);
+                Frame root = Window.Current.Content as Frame;
+                root.Navigate(typeof(HomePage));
+            } catch (Exception ex)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = "Ошибка",
+                    MaxWidth = this.ActualWidth,
+                    Content = "Произошла ошибка авторизации. Попробуйте ещё раз."
+                };
+
+                dialog.PrimaryButtonText = "OK";
+                dialog.IsPrimaryButtonEnabled = true;
+                dialog.PrimaryButtonClick += delegate
+                {
+
+                };
+                await dialog.ShowAsync();
+            }
+           
+        }
+
+        private void Dialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            throw new NotImplementedException();
         }
     }
 }

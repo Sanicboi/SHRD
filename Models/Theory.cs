@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace SHRD.Models
 {
-    public class TestTask
+    public class Theory
     {
-        
-        public string answer { get; set; }
-        public string text { get; set; }
         public string id { get; set; }
+        public string name { get; set; }
+        public string text { get; set; }
+
+        public string course { get; set; }
     }
 }

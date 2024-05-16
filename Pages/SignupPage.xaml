@@ -10,13 +10,43 @@
 
     <Page.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Verdana"></Setter>
+
             <Setter Property="Foreground" Value="White"></Setter>
         </Style>
         <Style TargetType="TextBlock" x:Key="Label">
-            <Setter Property="FontSize" Value="16"></Setter>
-            <Setter Property="Margin" Value="16 10 0 0"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="LineHeight" Value="29"></Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="CornerRadius" Value="15"></Setter>
+            <Setter Property="Padding" Value="16 16 16 16"></Setter>
+            <Setter Property="Margin" Value="0 5 0 0"></Setter>
+            <Setter Property="Width" Value="324"></Setter>
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="CornerRadius" Value="15"></Setter>
+            <Setter Property="Padding" Value="16 16 16 16"></Setter>
+            <Setter Property="Margin" Value="0 5 0 0"></Setter>
+            <Setter Property="Width" Value="324"></Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10 10 10 10"></Setter>
+            <Setter Property="Margin" Value="0 48 0 0"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Background" Value="#2198DC"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="Width" Value="324"></Setter>
+            <Setter Property="CornerRadius" Value="15"></Setter>
         </Style>
 
         <SolidColorBrush x:Key="TextControlBackground" Color="White"/>
@@ -31,35 +61,42 @@
         <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="White"/>
         <SolidColorBrush x:Key="TextControlBorderBrush" Color="White"/>
 
-        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="White"/>
-        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="White"/>
-        <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="White"/>
-        <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="White"/>
+        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#2198DC"/>
+        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#2198DC"/>
+        <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#2198DC"/>
+        <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#2198DC"/>
+        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
+        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="White"/>
     </Page.Resources>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Assets/school.jpg" Opacity="0.3"></ImageBrush>
+            <ImageBrush ImageSource="../Assets/circles-1.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#2f67ff" Width="600" Padding="16 16 16 16" MaxHeight="300" VerticalAlignment="Center" CornerRadius="16">
+        <Grid Grid.Row="0"  Width="500" MaxHeight="400" VerticalAlignment="Center" CornerRadius="20" Padding="80 50 80 50" HorizontalAlignment="Center">
+            <Grid.Background>
+                <!--<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#62cff4" Offset="0.0"/>
+                    <GradientStop Color="" Offset="1.0"/>
+                </LinearGradientBrush>-->
+                <SolidColorBrush Color="#013451"></SolidColorBrush>
+            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" TextAlignment="Center" FontSize="24" FontWeight="Bold" Margin="0 20 0 0">Регистрация</TextBlock>
-            <TextBlock Grid.Row="1" Style="{StaticResource Label}">Ник</TextBlock>
-            <TextBox Grid.Row="2" CornerRadius="4" x:Name="Username" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16 10 0 0" Width="300"></TextBox>
-            <TextBlock Grid.Row="3" Style="{StaticResource Label}">Пароль</TextBlock>
-            <PasswordBox Grid.Row="4" CornerRadius="4" x:Name="Password" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16 10 0 0" Width="300"></PasswordBox>
-            <Button Grid.Row="5" CornerRadius="4" Background="White" Margin="0 20 0 10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Зарегистрироваться" Click="Button_Click"></Button>
+            <TextBlock Grid.Row="0" Style="{StaticResource Label}">Логин</TextBlock>
+            <TextBox  Grid.Row="1" x:Name="Username"></TextBox>
+            <TextBlock Grid.Row="2" Margin="0 16 0 0" Style="{StaticResource Label}">Пароль</TextBlock>
+            <PasswordBox Grid.Row="3" x:Name="Password"></PasswordBox>
+            <Button Grid.Row="4" Click="Button_Click">Зарегистрироваться</Button>
         </Grid>
     </Grid>
-    
+
 </Page>

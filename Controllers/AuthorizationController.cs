@@ -6,8 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Net;
+using System.Net.Http.Json;
 using Windows.Storage;
 using System.IO;
+using Windows.ApplicationModel.Contacts;
+using SHRD.Models;
+using SHRD.Controllers;
 
 namespace SHRD
 {
@@ -16,36 +20,41 @@ namespace SHRD
         
         private static HttpClient client = new HttpClient();
         public static string Token;
+        public static Contact me;
+        public static User instance;
 
-        public static async Task<bool> Login(string username, string password)
+        private class TokenData
         {
-            UserCreateData requestData = new UserCreateData(username, password);
-            StringContent requestContent = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("api/login", requestContent);
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                string responseData = await response.Content.ReadAsStringAsync();
-                var token = await response.Content.ReadAsStringAsync();
-                await TokenManager.Set(token);
-                Token = token;
-                return true;
-            } else
-            {
-                return false;
-            }
+            public string token { get; set; }
+        }
 
+
+        public static async Task Login(string username, string password)
+        {
+            UserCreateData requestData = new UserCreateData();
+            requestData.password = password;
+            requestData.username = username;
+            var response = await client.PostAsJsonAsync("api/login", requestData);
+            string content = await response.Content.ReadAsStringAsync();
+            var data = JsonSerializer.Deserialize<TokenData>(content);
+            await TokenManager.Set(data.token);
+            Token = data.token;
         }
 
 
 
         public static async Task Signup(string username, string password)
         {
-            UserCreateData requestData = new UserCreateData(username, password);
-            StringContent requestContent = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("api/user", requestContent);
-            string token = await response.Content.ReadAsStringAsync();
-            await TokenManager.Set(token);
-            Token = token;
+
+                UserCreateData requestData = new UserCreateData();
+                requestData.password = password;
+                requestData.username = username;
+                var response = await client.PostAsJsonAsync("api/user", requestData);
+                string content = await response.Content.ReadAsStringAsync();
+                var data = JsonSerializer.Deserialize<TokenData>(content);
+                await TokenManager.Set(data.token);
+                Token = data.token;
+
         }
 
         public static async Task Logout()
@@ -58,13 +67,28 @@ namespace SHRD
         public static async Task Setup(string baseAddress = "http://localhost/")
         {
             client.BaseAddress = new Uri(baseAddress);
+            me = new Contact();
             Token = "";
             try
             {
                 Token = await TokenManager.Get();
+                await UserController.Setup();
+                await TestController.Setup();
+                TheoryController.Setup();
+                instance = await UserController.Me();
+                me.FirstName = instance.username;
+                
             } catch (Exception ex)
             {
                 Token = "";
+            }
+            try
+            {
+                me.SourceDisplayPicture = await UserController.GetPic();
+            }
+            catch (Exception ex)
+            {
+
             }
         }
         
