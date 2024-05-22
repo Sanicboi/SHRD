@@ -12,6 +12,7 @@ using System.IO;
 using Windows.ApplicationModel.Contacts;
 using SHRD.Models;
 using SHRD.Controllers;
+using System.Net.Http.Headers;
 
 namespace SHRD
 {
@@ -20,8 +21,6 @@ namespace SHRD
         
         private static HttpClient client = new HttpClient();
         public static string Token;
-        public static Contact me;
-        public static User instance;
 
         private class TokenData
         {
@@ -39,6 +38,7 @@ namespace SHRD
             var data = JsonSerializer.Deserialize<TokenData>(content);
             await TokenManager.Set(data.token);
             Token = data.token;
+            UserController.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
         }
 
 
@@ -54,6 +54,7 @@ namespace SHRD
                 var data = JsonSerializer.Deserialize<TokenData>(content);
                 await TokenManager.Set(data.token);
                 Token = data.token;
+                UserController.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
 
         }
 
@@ -64,27 +65,24 @@ namespace SHRD
         }
 
 
-        public static async Task Setup(string baseAddress = "http://localhost/")
+        public static async Task Setup(string baseAddress = "http://89.111.172.179/")
         {
             client.BaseAddress = new Uri(baseAddress);
-            me = new Contact();
             Token = "";
             try
             {
                 Token = await TokenManager.Get();
-                await UserController.Setup();
-                await TestController.Setup();
-                TheoryController.Setup();
-                instance = await UserController.Me();
-                me.FirstName = instance.username;
                 
             } catch (Exception ex)
             {
                 Token = "";
             }
+            await UserController.Setup(baseAddress);
+            await TestController.Setup(baseAddress);
+            TheoryController.Setup(baseAddress);
             try
             {
-                me.SourceDisplayPicture = await UserController.GetPic();
+                //me.SourceDisplayPicture = await UserController.GetPic();
             }
             catch (Exception ex)
             {

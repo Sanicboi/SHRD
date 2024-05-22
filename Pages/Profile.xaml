@@ -27,12 +27,14 @@
                 <RowDefinition Height=".5*"></RowDefinition>
                 <RowDefinition Height=".5*"></RowDefinition>
                 <RowDefinition Height=".5*"></RowDefinition>
+                <RowDefinition Height=".5*"></RowDefinition>
                 <RowDefinition Height="3*"></RowDefinition>
             </Grid.RowDefinitions>
-            <PersonPicture Grid.Row="0" Contact="{x:Bind me}"></PersonPicture>
-            <TextBlock Grid.Row="1" Margin="0 0 0 0" Text="{x:Bind me.FullName }" FontSize="42" FontWeight="SemiBold" TextAlignment="Center"></TextBlock>
-            <TextBlock VerticalAlignment="Top" Grid.Row="2" Margin="0 0 0 0" Text="{x:Bind SolvedTasks}" TextAlignment="Center" FontWeight="SemiLight" FontSize="32"></TextBlock>
-            <TextBlock VerticalAlignment="Top" Grid.Row="3" Margin="0 0 0 0" Text="{x:Bind AvgPerc}" TextAlignment="Center" FontWeight="SemiLight" FontSize="32"></TextBlock>
+            <PersonPicture Grid.Row="0" Contact="{x:Bind data.contact, Mode=OneWay}"></PersonPicture>
+            <TextBlock Grid.Row="1" Margin="0 0 0 0" Text="{x:Bind data.Me.username, Mode=OneWay}" FontSize="42" FontWeight="SemiBold" TextAlignment="Center"></TextBlock>
+            <TextBlock VerticalAlignment="Top" Grid.Row="2" Margin="0 0 0 0" Text="{x:Bind data.SolvedTasks, Mode=OneWay}" TextAlignment="Center" FontWeight="SemiLight" FontSize="32"></TextBlock>
+            <TextBlock VerticalAlignment="Top" Grid.Row="3" Margin="0 0 0 0" Text="{x:Bind data.AvgPerc, Mode=OneWay}" TextAlignment="Center" FontWeight="SemiLight" FontSize="32"></TextBlock>
+            <Button Grid.Row="4" Click="Logout">Выйти</Button>
         </Grid>
     </Grid>
 </Page>

@@ -18,7 +18,7 @@ namespace SHRD.Controllers
             public List<Theory> theory { get; set; }
         }
         private static HttpClient client = new HttpClient();
-        public static void Setup(string baseAddress = "http://localhost/")
+        public static void Setup(string baseAddress)
         {
             client.BaseAddress = new Uri(baseAddress);
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {AuthorizationController.Token}");

@@ -13,7 +13,7 @@ namespace SHRD
 {
     internal static class UserController
     {
-        private static HttpClient client = new HttpClient();
+        public static HttpClient client = new HttpClient();
         private static IRandomAccessStream pic;
 
         public static async Task Setup(string baseAddress = "http://localhost/") {
@@ -37,9 +37,15 @@ namespace SHRD
 
         public static async Task<User> Me()
         {
-            var response = await client.GetAsync("api/me");
-            var body = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<User>(body);
+            try
+            {
+                var response = await client.GetAsync("api/me");
+                var body = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<User>(body);
+            } catch (Exception ex)
+            {
+                return new User();
+            }
         }
 
         public static async Task<IRandomAccessStreamReference> GetPic()
